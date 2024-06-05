@@ -29,10 +29,11 @@ export function ProductSelection() {
   return (
     <div className="p-4 gap-2 border-b rounded-none flex justify-between w-full">
       <Select
+        
         value={selectedProductId?.toString() || ''}
         onValueChange={(value) => handleProductChange(Number(value))}
       >
-        <SelectTrigger className="w-full">
+        <SelectTrigger className="w-full h-12 text-xl">
           <SelectValue placeholder="Select Product" />
         </SelectTrigger>
         <SelectContent>
@@ -43,7 +44,7 @@ export function ProductSelection() {
           ))}
         </SelectContent>
       </Select>
-      <Button onClick={() => supabase.auth.signOut()} variant="secondary">Log out</Button>
+      { /* <Button onClick={() => supabase.auth.signOut()} variant="secondary">Log out</Button> */}
     </div>
   );
 }

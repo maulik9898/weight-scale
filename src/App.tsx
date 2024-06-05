@@ -6,6 +6,7 @@ import { Session } from '@supabase/supabase-js'
 import { Login } from './components/Login'
 import useInventoryStore from './store'
 import { TransactionList } from './components/TransactionList'
+import { AppHeader } from './components/AppHeader'
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
   }
   return (
     <div className='h-screen w-full max-h-svh'>
+      <AppHeader />
       <ProductSelection />
       {selectedProductId &&
         <>
