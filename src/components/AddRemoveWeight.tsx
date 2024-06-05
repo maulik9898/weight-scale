@@ -1,4 +1,3 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { AddWeight } from "./AddWeight"
 import { RemoveWeight } from "./RemoveWeight"
 import useInventoryStore from "@/store";

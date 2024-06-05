@@ -8,7 +8,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import useInventoryStore from '../store';
-import { Button } from "./ui/button";
 
 export function ProductSelection() {
   const productQuery = useQuery({

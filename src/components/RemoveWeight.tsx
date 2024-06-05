@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Button } from "./ui/button";
-import { Input } from "./ui/input";
 import { adjustProductWeight } from "@/supabase";
 import { Loader2 } from "lucide-react";
 
