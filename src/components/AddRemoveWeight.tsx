@@ -4,11 +4,9 @@ import useInventoryStore from "@/store";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/supabase";
 import { useEffect, useState } from "react";
-import { SERVICE_UUID, CHARACTERISTIC_UUID_RX, CHARACTERISTIC_UUID_TX } from "./BleConnect";
+import { SERVICE_UUID, CHARACTERISTIC_UUID_RX } from "./BleConnect";
 
-function getRandomNumberBetween(min: number, max: number): number {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+
 export function AddRemoveWeight() {
 
   const selectedProductId = useInventoryStore((state) => state.selectedProductId);
@@ -28,7 +26,6 @@ export function AddRemoveWeight() {
     const server = await device.gatt?.connect();
     const service = await server?.getPrimaryService(SERVICE_UUID);
     const rxCharacteristic = await service?.getCharacteristic(CHARACTERISTIC_UUID_RX);
-    const txCharacteristic = await service?.getCharacteristic(CHARACTERISTIC_UUID_TX);
 
     await rxCharacteristic?.startNotifications();
     rxCharacteristic?.addEventListener('characteristicvaluechanged', handleWeightData);

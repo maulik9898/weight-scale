@@ -1,7 +1,6 @@
 
 /// <reference types="web-bluetooth" />
 
-import React, { useEffect } from 'react'
 import { Button } from './ui/button'
 import useInventoryStore from '@/store'
 export const SERVICE_UUID = 0xe001;
