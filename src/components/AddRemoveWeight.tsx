@@ -4,6 +4,7 @@ import useInventoryStore from "@/store";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/supabase";
 import { useEffect, useState } from "react";
+import { SERVICE_UUID, CHARACTERISTIC_UUID_RX, CHARACTERISTIC_UUID_TX } from "./BleConnect";
 
 function getRandomNumberBetween(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -11,6 +12,7 @@ function getRandomNumberBetween(min: number, max: number): number {
 export function AddRemoveWeight() {
 
   const selectedProductId = useInventoryStore((state) => state.selectedProductId);
+  const device = useInventoryStore((state) => state.device);
 
   const productQuery = useQuery({
     queryKey: ["product", selectedProductId],
@@ -21,21 +23,42 @@ export function AddRemoveWeight() {
     enabled: selectedProductId != undefined || selectedProductId != null
   })
   const [number, setNumber] = useState<number>(0);
+  const connectAndSubscribe = async() => {
+    if(device == null) return
+    const server = await device.gatt?.connect();
+    const service = await server?.getPrimaryService(SERVICE_UUID);
+    const rxCharacteristic = await service?.getCharacteristic(CHARACTERISTIC_UUID_RX);
+    const txCharacteristic = await service?.getCharacteristic(CHARACTERISTIC_UUID_TX);
+
+    await rxCharacteristic?.startNotifications();
+    rxCharacteristic?.addEventListener('characteristicvaluechanged', handleWeightData);
+  }
 
   useEffect(() => {
     // Generate a new random number every 3 seconds
-    const interval = setInterval(() => {
-      const min = 1;
-      const max = 100;
-      const randomNumber = getRandomNumberBetween(min, max);
-      setNumber(randomNumber);
-    }, 3000);
+    if(device){
+      try {
+        connectAndSubscribe()
+      } catch (error) {
+        console.log("error ", error)
+      }
+     
+    }
 
     // Clean up the interval on component unmount
-    return () => {
-      clearInterval(interval);
-    };
   }, []);
+
+
+  function handleWeightData(event: any) {
+    const value = new TextDecoder().decode(event.target.value);
+    //remove the 0x04 delimiter in last byte
+  
+      const data = JSON.parse(value.slice(0, -1));
+      // console.log(value);
+      console.log(data);
+      const weightValue = data.weight;
+      setNumber(weightValue)
+  }
   return (
     <>
       <div className=" p-4 text-2xl border-b rounded-none text-gray-500 font-semibold flex justify-between gap-2 w-full">
