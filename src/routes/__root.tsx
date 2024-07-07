@@ -1,9 +1,7 @@
 import { Toaster } from '@/components/ui/sonner'
 import { supabase } from '@/supabase'
 import { createRootRoute, Outlet, useNavigate } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import { useEffect } from 'react'
-import { Z_VERSION_ERROR } from 'zlib'
 
 export const Route = createRootRoute({
   component: Root

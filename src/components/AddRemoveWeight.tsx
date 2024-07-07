@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { AddWeight } from "./AddWeight";
 import { RemoveWeight } from "./RemoveWeight";
 import { Button } from "@/components/ui/button";
-import { Bluetooth, BluetoothConnected, WifiIcon } from "lucide-react";
+import { Bluetooth, BluetoothConnected } from "lucide-react";
 
 export const SERVICE_UUID = 0xe001;
 export const CHARACTERISTIC_UUID_TX = 0xe002;
 export const CHARACTERISTIC_UUID_RX = 0xe003;
 
-const DEBUG_MODE = process.env.NODE_ENV === 'development';
+// const DEBUG_MODE = process.env.NODE_ENV === 'development';
 
-function getRandomNumberBetween(min: number, max: number): number {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+// function getRandomNumberBetween(min: number, max: number): number {
+//   return Math.floor(Math.random() * (max - min + 1)) + min;
+// }
 
 export function AddRemoveWeight() {
   const [weight, setWeight] = useState<number>(0);

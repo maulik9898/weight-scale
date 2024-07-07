@@ -1,7 +1,6 @@
 import { AddRemoveWeight } from '@/components/AddRemoveWeight';
 import { ProductSelection } from '@/components/ProductSelection';
 import { TransactionList } from '@/components/TransactionList';
-import { Button } from '@/components/ui/button';
 import { useInventoryStore, useUserStore } from '@/store';
 import { supabase } from '@/supabase';
 import { useQuery } from '@tanstack/react-query';
@@ -33,20 +32,6 @@ export function Index() {
     enabled: !!user && selectedProductId != null && selectedProductId !== undefined
   });
 
-  const handleConnect = () => {
-    navigator.bluetooth.getDevices({
-      acceptAllDevices: true
-    })
-      .then(device => {
-        console.log("device ", device)
-        console.log('> Name:             ' + device.name);
-        console.log('> Id:               ' + device.id);
-        console.log('> Connected:        ' + device.gatt.connected);
-      })
-      .catch(error => {
-        console.log('Argh! ' + error);
-      });
-  }
   return (
     <>
       <ProductSelection />

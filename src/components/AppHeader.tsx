@@ -11,19 +11,6 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Link } from '@tanstack/react-router'
 
-type NavItem = {
-  to: string;
-  label: string;
-}
-
-const navItems: NavItem[] = [
-  { to: "/", label: "Dashboard" },
-  { to: "/orders", label: "Orders" },
-  { to: "/products", label: "Products" },
-  { to: "/customers", label: "Customers" },
-  { to: "/settings", label: "Settings" },
-]
-
 export const AppHeader: React.FC = () => {
   return (
     <header className="sticky top-0 flex items-center justify-between px-4 py-2 border-b bg-background">
