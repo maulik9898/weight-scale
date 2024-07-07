@@ -1,4 +1,4 @@
-import useInventoryStore from "@/store";
+import { useInventoryStore } from "@/store";
 import { supabase } from "@/supabase";
 import { useQuery } from "@tanstack/react-query"
 import { Transaction } from "./Transaction";

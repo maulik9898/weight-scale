@@ -13,16 +13,19 @@ export type Database = {
         Row: {
           id: number
           name: string
+          user_id: string
           weight: number
         }
         Insert: {
           id?: number
           name: string
+          user_id: string
           weight?: number
         }
         Update: {
           id?: number
           name?: string
+          user_id?: string
           weight?: number
         }
         Relationships: []
@@ -64,6 +67,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      add_product: {
+        Args: {
+          p_name: string
+          p_user_id: string
+          p_initial_weight: number
+        }
+        Returns: number
+      }
       adjust_product_weight: {
         Args: {
           p_product_id: number
@@ -71,6 +82,13 @@ export type Database = {
           p_weight_change: number
         }
         Returns: number
+      }
+      delete_product: {
+        Args: {
+          p_product_id: number
+          p_user_id: string
+        }
+        Returns: boolean
       }
     }
     Enums: {

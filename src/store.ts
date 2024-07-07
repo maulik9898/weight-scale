@@ -1,13 +1,25 @@
 import { create } from 'zustand';
+import { User } from '@supabase/supabase-js';
 
 interface InventoryState {
   selectedProductId: number | null;
   setSelectedProductId: (productId: number | null) => void;
 }
 
-const useInventoryStore = create<InventoryState>((set) => ({
+export const useInventoryStore = create<InventoryState>((set) => ({
   selectedProductId: null,
   setSelectedProductId: (productId) => set({ selectedProductId: productId }),
 }));
 
-export default useInventoryStore;
+
+interface UserState {
+  user: User | null;
+  setUser: (user: User | null) => void;
+}
+
+
+export const useUserStore = create<UserState>((set) => ({
+  user: null,
+  setUser: (user) => set({ user }),
+}));
+

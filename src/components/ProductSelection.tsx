@@ -7,15 +7,25 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import useInventoryStore from '../store';
+import { Tables } from "@/types";
+import { useInventoryStore, useUserStore } from "@/store";
 
 export function ProductSelection() {
-  const productQuery = useQuery({
-    queryKey: ['products'],
-    queryFn: async () => {
-      const { data } = await supabase.from('products').select();
-      return data;
-    },
+  const user = useUserStore((state) => state.user)
+
+  const productQuery = useQuery<Tables<'products'>[]>({
+    queryKey: ['products', user?.id],
+    queryFn:
+      async () => {
+        if (!user) throw new Error('Not authenticated');
+        const { data, error } = await supabase
+          .from('products')
+          .select('*')
+          .eq('user_id', user.id)
+        if (error) throw error;
+        return data;
+      },
+    enabled: !!user
   });
 
   const selectedProductId = useInventoryStore((state) => state.selectedProductId);
@@ -28,7 +38,7 @@ export function ProductSelection() {
   return (
     <div className="p-4 gap-2 border-b rounded-none flex justify-between w-full">
       <Select
-        
+
         value={selectedProductId?.toString() || ''}
         onValueChange={(value) => handleProductChange(Number(value))}
       >
