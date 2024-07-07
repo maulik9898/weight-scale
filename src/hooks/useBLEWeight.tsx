@@ -13,7 +13,7 @@ export function useBLEWeight() {
     const data = JSON.parse(value.slice(0, -1));
     const weightValue = data.weight;
     setWeight(weightValue);
-    console.log('Weight:', weightValue); // Log weight to console
+    console.log('Weight:', value); // Log weight to console
   }, []);
 
   const connect = useCallback(async () => {
