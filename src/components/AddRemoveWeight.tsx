@@ -32,8 +32,8 @@ export function AddRemoveWeight() {
             <p className="text-lg font-bold text-green-500">KG</p>
           </div>
           <div className="flex p-4 gap-2 w-full">
-            <AddWeight weight={weight} />
-            <RemoveWeight weight={weight} />
+            <AddWeight weight={weight * 0.01} />
+            <RemoveWeight weight={weight * 0.01} />
           </div>
         </>
       ) : (

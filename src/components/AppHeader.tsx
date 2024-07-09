@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Link } from '@tanstack/react-router'
+import { supabase } from '@/supabase'
 
 export const AppHeader: React.FC = () => {
   return (
@@ -71,7 +72,7 @@ export const AppHeader: React.FC = () => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuItem>Logout</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => supabase.auth.signOut()}>Logout</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </header>
