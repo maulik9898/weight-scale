@@ -20,6 +20,8 @@ function Root() {
     supabase.auth.onAuthStateChange((_event, session) => {
       if (!session) {
         navigate({ to: "/login" })
+      } else {
+        navigate({to: "/"})
       }
     })
   }, [])
