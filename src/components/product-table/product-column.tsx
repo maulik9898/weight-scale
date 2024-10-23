@@ -2,6 +2,8 @@ import { ColumnDef } from "@tanstack/react-table"
 import { Tables } from "@/types"
 import { Checkbox } from "../ui/checkbox"
 import { DataTableColumnHeader } from "../data-table/DataTableColumnHeader"
+import { DeleteProduct } from "../DeleteProduct";
+import { EditProduct } from "../EditProduct";
 
 export type Product = {
   id: string
@@ -57,6 +59,20 @@ export const productColumns: ColumnDef<Tables<'products'>>[] = [
         unitDisplay: "short",
       }).format(weight)
       return <div className="font-medium">{formatted}</div>
+    },
+  },
+  {
+    accessorKey: "action",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title={getProductColumnTitle(column.id)} />
+    ),
+    cell: ({ row }) => {
+      return (
+        <div className="flex gap-2">
+          <EditProduct productId={row.original.id} currentName={row.original.name} />
+          <DeleteProduct productId={row.original.id} />
+        </div>
+      );
     },
   },
 ]
