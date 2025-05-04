@@ -11,7 +11,8 @@ export function useBLEWeight() {
   const handleWeightData = useCallback((event: any) => {
     const value = new TextDecoder().decode(event.target.value);
     const data = JSON.parse(value.slice(0, -1));
-    const weightValue = data.weight*0.01;
+  //  const weightValue = data.weight*0.01;
+    const weightValue = data.weight
     setWeight(weightValue);
     console.log('Weight:', value); // Log weight to console
   }, []);
